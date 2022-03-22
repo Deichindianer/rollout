@@ -68,7 +68,10 @@ func ServiceRollout(s Service) error {
 			}
 		}
 
-		return ServiceErr{RolloutErr: err}
+		return ServiceErr{
+			RollbackSuccessful: true,
+			RolloutErr:         err,
+		}
 	}
 
 	err = s.CheckHealth()
@@ -81,7 +84,10 @@ func ServiceRollout(s Service) error {
 			}
 		}
 
-		return ServiceErr{CheckHealthErr: err}
+		return ServiceErr{
+			RollbackSuccessful: true,
+			CheckHealthErr:     err,
+		}
 	}
 	return nil
 }

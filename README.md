@@ -10,6 +10,11 @@ if err != nil {
 	    fmt.Printf("unexpected failed deployment: %s\n", err)
 	}
 	
+	if !svcErr.RollbackSuccessful {
+        // create a page or incident 
+		fmt.Printf("fatal: %s", svcErr)
+	}
+	
 	// Do any detailed handling depending on which stage failed.
 	fmt.Printf("service rollout failed: %s\n", err)
 }
@@ -43,3 +48,7 @@ wraps the errors from the three methods of a service.
 The error message with vary depending on which part failed.
 If you're throwing typed errors or well identifiable ones in your
 methods, you can use `errors.Is` to check for them.
+
+With the `RollbackSuccessful` field inside a `ServiceErr` you can check whether
+the attempted rollback was successful and decide to have a more severe answer
+for failed rollbacks.
