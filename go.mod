@@ -1,3 +1,3 @@
-module github.com/Deichindianer/rollout
+module github.com/catouc/rollout
 
 go 1.17
